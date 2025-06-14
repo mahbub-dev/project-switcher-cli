@@ -1,12 +1,68 @@
 {
   "name": "project-switcher-cli",
   "version": "1.0.0",
-  "description": "Switch between projects using a CLI tool",
+  "description": "A simple and efficient CLI tool for quickly navigating and opening your development projects",
+  "main": "index.js",
   "bin": {
     "ps": "index.js"
   },
   "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run test"
+  },
+  "keywords": [
+    "cli",
+    "project",
+    "switcher", 
+    "navigation",
+    "development",
+    "productivity",
+    "folder",
+    "directory",
+    "workspace",
+    "project-management",
+    "developer-tools",
+    "terminal",
+    "command-line",
+    "file-explorer",
+    "quick-access"
+  ],
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "url": "https://your-website.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/project-switcher-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/project-switcher-cli/issues"
+  },
+  "homepage": "https://github.com/yourusername/project-switcher-cli#readme",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "index.js",
+    "commands/",
+    "README.md",
+    "LICENSE"
+  ],
   "dependencies": {
     "inquirer": "^8.2.6"
-  }
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0"
+  },
+  "preferGlobal": true,
+  "os": [
+    "darwin",
+    "linux", 
+    "win32"
+  ]
 }

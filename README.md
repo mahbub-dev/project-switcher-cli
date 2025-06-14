@@ -4,11 +4,11 @@ A simple and efficient CLI tool for quickly navigating and opening your developm
 
 ## 🚀 Features
 
-- **Quick Project Access**: Open any project with a simple command
-- **Smart Project Discovery**: Automatically finds projects in your base folder
-- **Interactive UI**: Browse projects with an intuitive interface
-- **Flexible Opening**: Open projects by name, index, or browse anywhere
-- **One-time Setup**: Configure once, use everywhere
+-   **Quick Project Access**: Open any project with a simple command
+-   **Smart Project Discovery**: Automatically finds projects in your base folder
+-   **Interactive UI**: Browse projects with an intuitive interface
+-   **Flexible Opening**: Open projects by name, index, or browse anywhere
+-   **One-time Setup**: Configure once, use everywhere
 
 ## 📦 Installation
 
@@ -20,7 +20,6 @@ Or if you prefer using it locally:
 
 ```bash
 npm install project-switcher-cli
-npx ps --help
 ```
 
 ## 🛠️ Setup
@@ -36,6 +35,7 @@ This will prompt you to select the folder where your projects are located. The t
 ## 📋 Commands
 
 ### `ps set`
+
 Configure or change your base project folder.
 
 ```bash
@@ -43,6 +43,7 @@ ps set
 ```
 
 ### `ps list`
+
 Display all projects in your base folder and select one to open.
 
 ```bash
@@ -50,6 +51,7 @@ ps list
 ```
 
 ### `ps open <project>`
+
 Open a specific project by name or index.
 
 ```bash
@@ -61,6 +63,7 @@ ps open 3
 ```
 
 ### `ps openui [folder]`
+
 Browse and open projects within your base folder using an interactive UI.
 
 ```bash
@@ -72,6 +75,7 @@ ps openui subfolder-name
 ```
 
 ### `ps openany`
+
 Browse and open any folder on your system (not limited to base folder).
 
 ```bash
@@ -79,6 +83,7 @@ ps openany
 ```
 
 ### `ps --version [format]`
+
 Display version information.
 
 ```bash
@@ -91,7 +96,7 @@ The tool stores its configuration in a `config.json` file located in the same di
 
 ```json
 {
-  "baseFolder": "/path/to/your/projects"
+	"baseFolder": "/path/to/your/projects"
 }
 ```
 
@@ -139,12 +144,15 @@ ps openany
 ## 🐛 Troubleshooting
 
 ### "Base folder is not set or invalid"
+
 This means your configured base folder doesn't exist or hasn't been set. Run `ps set` to reconfigure.
 
 ### Command not found
+
 Make sure the package is installed globally (`npm install -g project-switcher-cli`) or use `npx ps` if installed locally.
 
 ### Projects not showing up
+
 Verify that your base folder is correctly set and contains the expected project directories.
 
 ## 🤝 Contributing
