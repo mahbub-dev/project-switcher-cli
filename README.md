@@ -20,6 +20,7 @@ Or if you prefer using it locally:
 
 ```bash
 npm install project-switcher-cli
+npx ps
 ```
 
 ## 🛠️ Setup
