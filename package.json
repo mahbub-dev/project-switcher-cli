@@ -1,0 +1,12 @@
+{
+  "name": "pswitch-cli",
+  "version": "1.0.0",
+  "description": "Switch between projects using a CLI tool",
+  "bin": {
+    "ps": "index.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "inquirer": "^8.2.6"
+  }
+}
