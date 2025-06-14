@@ -1,6 +1,6 @@
 {
 	"name": "project-switcher-cli",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "A simple and efficient CLI tool for quickly navigating and opening your development projects",
 	"main": "index.js",
 	"bin": {

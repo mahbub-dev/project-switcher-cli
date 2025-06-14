@@ -29,11 +29,10 @@ module.exports = function setBaseFolder() {
 		);
 		console.log(`Great! Base folder set to: ${folderPath}`);
 		console.log(`Now run the following command as per your need`);
-		console.log("  ps set         → Select base project folder");
-		console.log("  ps list        → List and open project");
-		console.log("  ps open        → Open project by GUI");
-		console.log("  ps openi       → Open project by name or index");
-		console.log("  ps openany     → Browse and open any folder");
+		console.log("  ps list          → List and open project");
+		console.log("  ps open          → Open project by name or index");
+		console.log("  ps openui        → Browse and Open project inside base folder");
+		console.log("  ps openany       → Browse and open any folder");
 	} catch (err) {
 		console.error("❌ PowerShell error:", err.message);
 	}
