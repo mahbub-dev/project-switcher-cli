@@ -1,117 +1,75 @@
-# PSwitch CLI 🚀
+# Project Switcher (ps)
 
-**Quick project switching tool for developers**
+A simple and efficient CLI tool for quickly navigating and opening your development projects. No more `cd`-ing through multiple directories or remembering complex folder paths!
 
-Tired of navigating through endless folders to find your projects? PSwitch CLI lets you instantly switch between your coding projects with simple commands. Set your projects folder once, then open any project in VS Code with just a few keystrokes.
+## 🚀 Features
 
-## ✨ Features
-
-- 🎯 **Instant project switching** - Open any project in seconds
-- 📁 **Smart folder management** - Set your base projects folder once
-- 🔍 **Multiple selection methods** - GUI, terminal list, or direct name/index
-- 🎨 **Clean terminal interface** - Beautiful, intuitive command output
-- ⚡ **Zero configuration** - Works out of the box after setup
-- 🔧 **VS Code integration** - Opens projects directly in VS Code
+- **Quick Project Access**: Open any project with a simple command
+- **Smart Project Discovery**: Automatically finds projects in your base folder
+- **Interactive UI**: Browse projects with an intuitive interface
+- **Flexible Opening**: Open projects by name, index, or browse anywhere
+- **One-time Setup**: Configure once, use everywhere
 
 ## 📦 Installation
 
 ```bash
-npm install -g pswitch-cli
+npm install -g project-switcher-cli
 ```
 
-## 🚀 Quick Start
+Or if you prefer using it locally:
 
-1. **Set your projects folder** (one-time setup):
-   ```bash
-   ps set
-   ```
+```bash
+npm install project-switcher-cli
+npx ps --help
+```
 
-2. **List and select a project**:
-   ```bash
-   ps list
-   ```
+## 🛠️ Setup
 
-3. **Open a project by name**:
-   ```bash
-   ps openi my-project
-   ```
-
-That's it! Your project opens in VS Code instantly.
-
-## 📖 Commands
-
-### `ps set`
-Set up your base projects folder. This is where PSwitch will look for your projects.
+Before using the tool, you need to set your base project folder:
 
 ```bash
 ps set
 ```
 
-**What it does:**
-- Opens a folder browser dialog
-- Saves your selection for future use
-- Validates the folder exists
+This will prompt you to select the folder where your projects are located. The tool will create a `config.json` file to remember this setting.
 
----
+## 📋 Commands
+
+### `ps set`
+Configure or change your base project folder.
+
+```bash
+ps set
+```
 
 ### `ps list`
-Display an interactive list of all projects. Navigate with arrow keys and press Enter to select.
+Display all projects in your base folder and select one to open.
 
 ```bash
 ps list
 ```
 
-**What it does:**
-- Shows all projects in your base folder
-- Navigate up/down with ↑↓ arrow keys
-- Press Enter to open selected project in VS Code
-- Press Esc to cancel
-
-**Example interaction:**
-```
-📁 Available projects:
-  → my-portfolio
-    react-app
-    node-api
-    python-scripts
-
-Use ↑↓ arrows to navigate, Enter to select, Esc to cancel
-```
-
----
-
-### `ps open`
-Open a project using a graphical folder browser.
+### `ps open <project>`
+Open a specific project by name or index.
 
 ```bash
-ps open
+# Open by project name
+ps open my-awesome-project
+
+# Open by index (from list command)
+ps open 3
 ```
 
-**What it does:**
-- Opens a GUI folder picker
-- Starts from your configured base folder
-- Opens selected project in VS Code
-
----
-
-### `ps openi`
-Display all projects in a numbered list and select one to open.
+### `ps openui [folder]`
+Browse and open projects within your base folder using an interactive UI.
 
 ```bash
-ps openi
-# Open by index number or name
-ps openi 1
-```
-**Features:**
-📁 Available projects:
-  1. my-portfolio
-  2. react-app
-  3. node-api
-  4. python-scripts
+# Browse base folder
+ps openui
 
-🚀 Select a project (number or name): 2
-🚀 Opening project: react-app
----
+# Browse specific subfolder
+ps openui subfolder-name
+```
 
 ### `ps openany`
 Browse and open any folder on your system (not limited to base folder).
@@ -120,62 +78,16 @@ Browse and open any folder on your system (not limited to base folder).
 ps openany
 ```
 
-**Use cases:**
-- Opening projects outside your main projects folder
-- One-time folder access
-- Client projects in different locations
-
----
-
-### `ps --version`
-Show version information and system details.
+### `ps --version [format]`
+Display version information.
 
 ```bash
 ps --version
 ```
 
-## 🛠️ Requirements
+## 🗂️ Configuration
 
-- **Node.js** 14.0.0 or higher
-- **VS Code** installed and accessible via `code` command
-- **Windows, macOS, or Linux**
-
-## 💡 Usage Examples
-
-### Daily Workflow
-```bash
-# Morning routine - see what projects you have
-ps list
-
-# Open a client project outside your main folder
-ps openany
-```
-
-### First Time Setup
-```bash
-# Install globally
-npm install -g pswitch-cli
-
-# Set your projects folder (e.g., ~/Projects, C:\Dev, etc.)
-ps set
-
-# List your projects
-ps list
-```
-
-### Project Organization Tips
-```
-📁 Your Projects Folder/
-├── 📁 personal-website/
-├── 📁 react-todo-app/
-├── 📁 python-automation/
-├── 📁 nodejs-api/
-└── 📁 flutter-mobile/
-```
-
-## 🔧 Configuration
-
-PSwitch stores its configuration in a `config.json` file in the installation directory. You can manually edit this if needed:
+The tool stores its configuration in a `config.json` file located in the same directory as the executable. The configuration includes:
 
 ```json
 {
@@ -183,57 +95,75 @@ PSwitch stores its configuration in a `config.json` file in the installation dir
 }
 ```
 
-## ❓ Troubleshooting
+## 📁 Project Structure
+
+Your projects should be organized in a base folder like this:
+
+```
+Projects/
+├── web-app-1/
+├── mobile-app/
+├── api-server/
+└── personal-website/
+```
+
+## 🔧 Usage Examples
+
+```bash
+# First-time setup
+ps set
+
+# List all projects and select one
+ps list
+
+# Quickly open a known project
+ps open web-app-1
+
+# Browse projects interactively
+ps openui
+
+# Open a project in a subfolder
+ps openui mobile
+
+# Browse any folder on your system
+ps openany
+```
+
+## ⚡ Quick Tips
+
+1. **Auto-setup**: If you haven't configured a base folder, the tool will automatically prompt you to set one
+2. **Tab completion**: Use tab completion with project names for faster access
+3. **Index shortcuts**: Remember project indices from `ps list` for super-quick access
+4. **Subfolders**: Use `ps openui <subfolder>` to navigate organized project hierarchies
+
+## 🐛 Troubleshooting
 
 ### "Base folder is not set or invalid"
-Run `ps set` to configure your projects folder.
+This means your configured base folder doesn't exist or hasn't been set. Run `ps set` to reconfigure.
 
-### "No projects found"
-- Make sure your base folder contains project directories
-- Check that the folder path is correct with `ps set`
+### Command not found
+Make sure the package is installed globally (`npm install -g project-switcher-cli`) or use `npx ps` if installed locally.
 
-### "VS Code not opening"
-- Ensure VS Code is installed
-- Make sure `code` command works in terminal
-- Try: `code --version` to test
-
-### Command not found: ps
-- Make sure you installed globally: `npm install -g pswitch-cli`
-- Restart your terminal
-- Check npm global path: `npm config get prefix`
+### Projects not showing up
+Verify that your base folder is correctly set and contains the expected project directories.
 
 ## 🤝 Contributing
 
-Found a bug or want to contribute? 
+Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## 📝 License
+## 📄 License
 
 MIT License - see LICENSE file for details.
 
-## 🌟 Why PSwitch?
+<!-- ## 🛣️ Roadmap -->
 
-**Before PSwitch:**
-```bash
-cd ~/Projects
-ls
-cd my-awesome-project
-code .
-# 😩 Multiple steps, lots of typing
-```
-
-**With PSwitch:**
-```bash
-ps openi awesome
-# ✨ One command, instant access
-```
+<!-- - [ ] Add project templates -->
+<!-- - [ ] Git integration (show branch status) -->
+<!-- - [ ] Favorite projects -->
+<!-- - [ ] Recent projects history -->
+<!-- - [ ] Custom project opening commands -->
+<!-- - [ ] Project search functionality -->
 
 ---
 
-**Made with ❤️ for developers who value efficiency**
-
-⭐ **Star this repo if PSwitch saves you time!**
+**Happy coding!** 🎉

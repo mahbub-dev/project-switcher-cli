@@ -25,12 +25,18 @@ module.exports = async function listProjects() {
     return;
   }
 
+  // Format choices with serial numbers
+  const choices = projects.map((name, index) => ({
+    name: `${index + 1}. ${name}`,
+    value: name, // Keep raw name for selection
+  }));
+
   const { selectedProject } = await inquirer.prompt([
     {
       type: 'list',
       name: 'selectedProject',
       message: '📁 Select a project to open:',
-      choices: projects
+      choices: choices
     }
   ]);
 

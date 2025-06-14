@@ -1,5 +1,5 @@
 {
-  "name": "pswitch-cli",
+  "name": "project-switcher-cli",
   "version": "1.0.0",
   "description": "Switch between projects using a CLI tool",
   "bin": {

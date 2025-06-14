@@ -1,9 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const readline = require('readline');
 const { exec } = require('child_process');
 
-module.exports = function openProjectByIndex() {
+module.exports = function openProjectByIndex(projectInput) {
   const configPath = path.join(__dirname, '..', 'config.json');
   
   if (!fs.existsSync(configPath)) {
@@ -18,6 +17,14 @@ module.exports = function openProjectByIndex() {
     return;
   }
 
+  // If no project input provided, show usage
+  if (!projectInput) {
+    console.log('❌ Please specify a project name or index.');
+    console.log('💡 Usage: ps openi <project-name> or ps openi <index>');
+    console.log('💡 Run `ps list` to see available projects.');
+    return;
+  }
+
   try {
     // Get all directories in the base folder
     const projects = fs.readdirSync(baseFolder, { withFileTypes: true })
@@ -29,44 +36,50 @@ module.exports = function openProjectByIndex() {
       return;
     }
 
-    // Display available projects
-    console.log('\n📁 Available projects:');
-    projects.forEach((project, index) => {
-      console.log(`  ${index + 1}. ${project}`);
-    });
+    let selectedProject;
 
-    // Create readline interface
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
-
-    // Get user selection
-    rl.question('\n🚀 Select a project (number or name): ', (answer) => {
-      rl.close();
+    // Check if input is a number (index)
+    const projectIndex = parseInt(projectInput) - 1;
+    if (!isNaN(projectIndex) && projectIndex >= 0 && projectIndex < projects.length) {
+      selectedProject = projects[projectIndex];
+    } else {
+      // Try exact name match (case-insensitive)
+      selectedProject = projects.find(project => 
+        project.toLowerCase() === projectInput.toLowerCase()
+      );
       
-      let selectedProject;
-      
-      // Check if input is a number
-      const projectIndex = parseInt(answer) - 1;
-      if (!isNaN(projectIndex) && projectIndex >= 0 && projectIndex < projects.length) {
-        selectedProject = projects[projectIndex];
-      } else {
-        // Check if input matches a project name (case-insensitive)
-        selectedProject = projects.find(project => 
-          project.toLowerCase() === answer.toLowerCase()
-        );
-      }
-      
+      // If no exact match, try partial match
       if (!selectedProject) {
-        console.log('❌ Invalid selection. Please try again.');
-        return;
+        const partialMatches = projects.filter(project =>
+          project.toLowerCase().includes(projectInput.toLowerCase())
+        );
+        
+        if (partialMatches.length === 1) {
+          selectedProject = partialMatches[0];
+          console.log(`🎯 Found partial match: ${selectedProject}`);
+        } else if (partialMatches.length > 1) {
+          console.log('❌ Multiple projects match your input:');
+          partialMatches.forEach((project, index) => {
+            console.log(`  ${projects.indexOf(project) + 1}. ${project}`);
+          });
+          console.log('💡 Please be more specific or use the index number.');
+          return;
+        }
       }
-      
-      const folderPath = path.join(baseFolder, selectedProject);
-      console.log(`🚀 Opening project: ${selectedProject}`);
-      exec(`code "${folderPath}"`);
-    });
+    }
+
+    if (!selectedProject) {
+      console.log(`❌ Project "${projectInput}" not found.`);
+      console.log('📁 Available projects:');
+      projects.forEach((project, index) => {
+        console.log(`  ${index + 1}. ${project}`);
+      });
+      return;
+    }
+
+    const folderPath = path.join(baseFolder, selectedProject);
+    console.log(`🚀 Opening project: ${selectedProject}`);
+    exec(`code "${folderPath}"`);
 
   } catch (err) {
     console.error('❌ Error reading projects:', err.message);
